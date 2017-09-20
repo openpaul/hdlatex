@@ -1,25 +1,30 @@
-\def\fileversion{0.1}
-\def\filedate{2015/08/26}
+\def\fileversion{0.1.1}
+\def\filedate{2017/09/20}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{hdprotokoll}
  [\filedate\space\fileversion\space 
-   Paul Saary HD Latex class]
+   Heidelberg IMPB inofficial Latex class]
+
 
 % % % % % % % % % % % % % % % % % % % % % % % % %
-\LoadClass{scrartcl} %scrartcl scrreprt
+\LoadClass{scrartcl}
 \RequirePackage[utf8]{inputenc}
 
-
+\newcommand{\hdtrue}{true}
+\DeclareOption{thesis}{\newcommand{\hdthesis}{true}}
+\DeclareOption{summary}{\newcommand{\hdsummary}{true}}
+\DeclareOption{normal}{\newcommand{\hdnormal}{true}}
+\DeclareOption{impberklaerung}{\newcommand{\hderklaerung}{true}}
+\ProcessOptions\relax
 % % % % % % % % % % % % % % % % % % % % % % % % %
 % paper
 \RequirePackage{geometry}
 \geometry{top=25mm,
-    	bottom=35mm,
+    	bottom=25mm,
     	inner=25mm,
     	outer=25mm, 
     	nomarginpar,
 	   	bindingoffset=12.5mm,
-    	%includefoot,    	
     	%showframe% <- only to show the page layout
     }
    
@@ -31,7 +36,6 @@
 \ofoot{\pagemark}
    
 % zeilenabstand
-%\renewcommand{\baselinestretch}{1.5}
 \usepackage{setspace}
 \setstretch{1.5}
 
@@ -66,11 +70,32 @@
 }
 
 
-%TOC
+%Table of contents
 \setkomafont{disposition}{%
 	\bfseries\sffamily
 }
 
+% % % % % % % % % % % % % % % % % % % % % % % % %
+% summary table of content
+% neues commando für title und ein TOC
+% Title, author, datum, art der veranstaltung
+\ifx \hdsummary \hdtrue
+\usepackage{tocloft}
+
+\newcommand{\listhdtitlename}{Inhaltsverzeichnis}
+\newlistof{hdtitle}{hdtit}{\listhdtitlename}
+\newcommand{\hdtitle}[4]{%
+    \refstepcounter{hdtitle}
+    \vskip17pt
+    {\noindent\setstretch{1.1}\section{#1}}
+    {\setstretch{1.4}
+        \vskip-8pt
+        \noindent\textsf{\textit{#2\hfill#3}\\
+            \noindent#4}\vskip1em}
+    \addcontentsline{hdtit}{hdtitle}
+    {\protect\numberline{\thehdtitle}{\textbf{#1}\\\textit{#2\hfill#3}\\#4}}\par}
+\fi
+% % % % % % % % % % % % % % % % % % % % % % % % %
 
 
 % % % % % % % % % % % % % % % % % % % % % % % % %
@@ -97,9 +122,30 @@
 \def\dateEnd#1{\gdef\@dateEnd{#1}}
 \def\@dateEnd{\@latex@warning@no@line{No \noexpand\dateEnd given}}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% masterthesis
+\def\Aname#1{\gdef\@Aname{#1}}
+\def\@Aname{\@latex@warning@no@line{No \noexpand\Aname given}}
+
+\def\Ainstitute#1{\gdef\@Ainstitute{#1}}
+\def\@Ainstitute{\@latex@warning@no@line{No \noexpand\Ainstitute given}}
+
+\def\Aabteilung#1{\gdef\@Aabteilung{#1}}
+\def\@Aabteilung{\@latex@warning@no@line{No \noexpand\Aabteilung given}}
 
 
+\def\Bname#1{\gdef\@Bname{#1}}
+\def\@Bname{\@latex@warning@no@line{No \noexpand\Bname given}}
 
+\def\Binstitute#1{\gdef\@Binstitute{#1}}
+\def\@Binstitute{\@latex@warning@no@line{No \noexpand\Binstitute given}}
+
+\def\Babteilung#1{\gdef\@Babteilung{#1}}
+\def\@Babteilung{\@latex@warning@no@line{No \noexpand\Babteilung given}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% define a custom title page
 \renewcommand*{\maketitle}{%
 
 % remove intent
@@ -128,7 +174,7 @@
 \normalsize
 \@author
 
-Abgegeben am~\@date
+Abgegeben am \@date
 
 
 \end{center}
@@ -139,13 +185,12 @@ Abgegeben am~\@date
 
 \cleardoublepage
 \pagenumbering{roman}
-%\setcounter{page}{-1}%
 
 
+
+\ifx \hdnormal \hdtrue
 
 Die vorliegende Arbeit wurde \@institute\ in der Zeit von \mbox{\@dateStart}\ bis \mbox{\@dateEnd}\ angefertigt.
-
-\ifx\nolocation\undfined
 
 \vspace{4em}
 \begin{tabular}{ll}
@@ -155,17 +200,59 @@ Die vorliegende Arbeit wurde \@institute\ in der Zeit von \mbox{\@dateStart}\ bi
 
 \vspace{4em}
 \fi
+
+
+\ifx\hdthesis \hdtrue
+Die vorliegende Masterarbeit wurde \@institute\ in der Zeit von \mbox{\@dateStart}\ bis \mbox{\@dateEnd}\ angefertigt.
+
+\vspace{4em}
+
+\begin{tabbing}
+    xxxxxxxxxxxxxxxxxxxxxxxxxxx \= xxxxxxxxxxxxxxxxxxxxxxxxxx \kill
+    Gutachter der Arbeit: \> \@Aname \\
+     \> \@Aabteilung \\
+     \> \@Ainstitute \\
+\end{tabbing}
+
+\vspace{1em}
+
+\begin{tabbing}
+    xxxxxxxxxxxxxxxxxxxxxxxxxxx \= xxxxxxxxxxxxxxxxxxxxxxxxxx \kill
+    Zweitgutachter der Arbeit: \> \@Bname \\
+    \> \@Babteilung \\
+    \> \@Binstitute \\
+\end{tabbing}
+
+\vspace{1em}
+\fi
+
+
 \section*{Eigenständigkeitserklärung}
 
+\ifx \hderklaerung \hdtrue  
+Ich erkläre hiermit ehrenwörtlich, dass:
+\begin{enumerate}
+    \item ich die vorliegende Bachelor-/Masterarbeit selbständig unter Anleitung verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe;
+    \item die Übernahme wörtlicher Zitate aus der Literatur/Internet sowie die Verwendung der Gedanken anderer Autoren an den entsprechenden Stellen innerhalb der Arbeit gekennzeichnet wurde;
+    \item ich meine Bachelor-/Masterarbeit bei keiner anderen Prüfung vorgelegt habe.
+\end{enumerate}
+Ich bin mir bewusst, dass eine falsche Erklärung rechtliche Folgen haben wird. 
+
+\else
+
 Ich erkläre hiermit ehrenwörtlich, dass ich die vorliegende Arbeit selbstständig angefertigt habe. Sämtliche aus fremden Quellen direkt oder indirekt übernommenen Gedanken sind als solche kenntlich gemacht. Die Arbeit wurde keiner anderen Prüfungsbehörde vorgelegt und noch nicht veröffentlicht
+
+\fi
 
 \vspace{4em}
 \begin{tabular}{ll}
 \makebox[2.5in]{\hrulefill} & \makebox[2.5in]{\hrulefill}\\
 Ort, Datum & Unterschrift\\% adds space between the two sets of signatures
 \end{tabular}
-
-
+\ifx \hderklaerung \hdtrue 
+\vspace{1em} 
+Hinweis: Ohne Unterschrift, Datums- und Ortsangabe ist diese Erklärung ungültig und damit auch die Bachelor-/Masterarbeit. 
+\fi
 
 \setlength{\parindent}{8pt}
 \cleardoublepage
