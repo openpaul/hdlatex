@@ -1,0 +1,114 @@
+% !TeX spellcheck = en_US
+\documentclass[%
+ 12pt, % Schriftgroesse
+ english, % wird an andere Pakete weitergereicht
+ a4paper, % Seitengroesse
+ DIV14, % Textbereichsgroesse (siehe Koma Skript Dokumentation !)
+ twoside,
+]{hdprotokoll}% Klassen: scrartcl, scrreprt, scrbook
+% -------------------------------------------------------------------------
+
+
+\usepackage[main=english, ngerman]{babel} % Spracheinstellung
+\usepackage[T1]{fontenc} % T1 Schrift Encoding
+\usepackage[utf8]{inputenc} % Font Encoding, benoetigt fuer Umlaute
+
+\usepackage{geometry}
+\usepackage{textgreek}
+
+\usepackage{textcomp} % Zusatzliche Symbole (Text Companion font extension)
+\usepackage{amsmath,lmodern, upgreek, booktabs, color} % 
+\usepackage[table]{xcolor}
+\usepackage[]{graphicx}
+
+\definecolor{red}{RGB}{196,4,4}
+\definecolor{blue}{RGB}{4,74,196}
+\definecolor{orange}{RGB}{230,119,0}
+
+
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+% activate={true,nocompatibility} - activate protrusion and expansion
+% final - enable microtype; use "draft" to disable
+% tracking=true, kerning=true, spacing=true - activate these techniques
+% factor=1100 - add 10% to the protrusion amount (default is 1000)
+% stretch=10, shrink=10 - reduce stretchability/shrinkability (default is 20/20)    
+\usepackage{hyperref}
+
+
+
+%Latin Modern Schrift
+\usepackage[outdir=./]{epstopdf}
+%\usepackage{gnuplottex}
+\renewcommand{\arraystretch}{1.3}
+
+\usepackage[detect-all=true]{siunitx}
+\usepackage{placeins, dnaseq, texshade}
+\usepackage{subfig}
+\renewcommand*\thesubfigure{\arabic{subfigure}} 
+%\setlength\parindent{0pt} % sets indent to zero
+%\setlength{\parskip}{8pt} % changes vertical space between paragraphs
+
+
+% Font wahnsinn für Time New roman similar font:
+%\usepackage{mathptmx}
+%\usepackage{helvet}
+
+\usepackage{grffile,xspace}
+\usepackage{listings}
+\lstdefinestyle{BashInputStyle}{
+language=bash,
+basicstyle=\small\ttfamily,
+columns=fullflexible,
+}
+
+
+\usepackage[backend=biber,natbib=true,style=authoryear,maxcitenames=2,maxbibnames=200,firstinits=true, uniquename=false,doi=false,isbn=false,url=false]{biblatex}
+\addbibresource{bibliothek.bib}
+\DefineBibliographyStrings{ngerman}{
+ andothers = {{et\,al\adddot}}, 
+}
+
+
+\title{HD Protokoll}
+
+\author{Your name}
+\date{the date} %25.01.2015}
+\titleheader{Free text}
+\supervisor{Betreut durch Dr. Who}
+
+\protokolltype{Latex Vorlage}
+\institute{free text}
+\dateStart{n. August 2017}
+\dateEnd{n. August 2017}
+
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+%
+
+
+\begin{document}
+\pagenumbering{roman}
+\maketitle
+\cleardoublepage
+
+\tableofcontents
+\cleardoublepage 
+\pagenumbering{arabic}
+
+
+\section{Section header}
+Lorem ipsum dolor sit amet, exerci officiis no mea. Ex pro ubique quidam. Ponderum dissentias sit an, mei an graecis elaboraret. Mei et nisl nihil, iusto copiosae eam no, ad mei melius forensibus reprimique.
+
+Quod propriae phaedrum vix te, an mei primis verear insolens. Eum case facilisis abhorreant id, eu sea dicant forensibus. Ius ad vocent splendide argumentum. Nihil vivendum vix ut. Per te impedit eleifend, in vis enim laudem ocurreret. Paulo detracto ea sed \cite{hector1999plant}.
+
+Duo agam volutpat in, ne quo suscipit consulatu interpretaris. Ius te unum veri signiferumque. Ancillae deleniti an mei, option praesent explicari in vim. Mel populo vidisse albucius ad, te eam aliquam officiis, sit integre iudicabit scriptorem at. Pri debet scribentur ei, eos at munere verterem moderatius. Vivendo interpretaris usu ex, qui et detracto delectus, his porro prodesset in.
+
+Tollit scaevola at qui, sit soluta nonumes ei. Ad pri iriure scriptorem. No mei ferri oblique dignissim, mei ea oblique signiferumque. Erant atomorum gloriatur an has, exerci animal ne mel, an aliquid intellegebat per. Dicunt iisque labores eu vim.
+
+Quis patrioque eu mea. Mei scripta pertinax at. His at dolorum dignissim. Mel dicit paulo scaevola ei. Sonet eruditi eu mei, ad sed vidit aeterno. His ei quem graece, id audire expetendis est. Maiorum posidonium cum at, nam id pertinacia delicatissimi, noster laoreet cum id.
+
+\printbibliography
+
+
+
+\end{document}
