@@ -1,47 +1,48 @@
 % !TeX spellcheck = en_US
 \documentclass[%
- 12pt,     % Schriftgroesse
- english,  % wird an andere Pakete weitergereicht
- a4paper,  % Seitengroesse
- DIV14,    % Textbereichsgroesse (siehe Koma Skript Dokumentation !)
- twoside,  % for double sided print
- thesis,  % thesis, summary, normal
- impberklaerung, % wenn du die IPMB Eigenständigkeitserklärung haben wilst, machs weg für eine alternative
+ 12pt,           % Schriftgroesse
+ english,        % wird an andere Pakete weitergereicht
+ a4paper,        % Seitengroesse
+ DIV14,          % Textbereichsgroesse (siehe Koma Skript Dokumentation !)
+ twoside,        % Für zweiseitigen Druck
+ thesis,         % thesis, summary, normal
+ impberklaerung, % Wechsel zwischen zwei Erklärungen
 ]{hdprotokoll}
 % -------------------------------------------------------------------------
 
 
 \usepackage[main=english, ngerman]{babel} % Spracheinstellung
-\usepackage[T1]{fontenc} % T1 Schrift Encoding
-\usepackage[utf8]{inputenc} % Font Encoding, benoetigt fuer Umlaute
+\usepackage[T1]{fontenc}                  % T1 Schrift Encoding
+\usepackage[utf8]{inputenc}               % Font Encoding, benoetigt fuer Umlaute
 
 \usepackage{geometry}
-\usepackage{textgreek}
-\usepackage{textcomp} % Zusatzliche Symbole (Text Companion font extension)
-\usepackage{amsmath,lmodern, upgreek, booktabs, color} % 
+\usepackage{textgreek}  % Grichisch im Text
+\usepackage{upgreek}    % gerade Griechische Buchstaben
+\usepackage{textcomp}   % Zusatzliche Symbole (Text Companion font extension)
+\usepackage{amsmath}    % Mathesymbole
+\usepackage{lmodern}
+\usepackage{booktabs}   % für Tabellen
+\usepackage{color}
 \usepackage[table]{xcolor}
 \usepackage{graphicx}
-\usepackage{grffile,xspace}
-
+\usepackage{grffile}
+\usepackage{xspace}
+\usepackage[detect-all=true]{siunitx} % Si units
 % microtype for better type setting
 \usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}   
 \usepackage{hyperref}
 
-% wieso auch immer, aber wir definieren das hier. Scheint einen grund gehabt zu haben
-\renewcommand{\arraystretch}{1.3}
 
-% si units sind wichtig
-\usepackage[detect-all=true]{siunitx}
-
-% sub figures
+% Unterfigures und die Beschriftung dieser
 \usepackage{subfig}
 \renewcommand*\thesubfigure{\arabic{subfigure}} 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Font wahnsinn für Time New roman similar font:
-% wenn du unbedingt Times New roman haben willst kommentiere die nächsten
-% zwei zeilen aus
+% Fonts Time New Roman similar font:
+% wenn du Times New roman haben willst kommentiere die nächsten
+% zwei zeilen aus. Sie ersetz die schöne LaTeX CMU Serif mit
+% Times New Roman und CMU sans Serif mit Helvetica
 %\usepackage{mathptmx}
 %\usepackage{helvet}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -57,9 +58,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% variables
-\title{HD Protokoll}
+% Glossar
+\usepackage[nonumberlist,acronym]{glossaries}
+\makeglossaries
+\input{glossar.g}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Titelblatt
+\title{HD Protokoll}
 \author{Your name}
 \date{dd.mm.yyyy}
 \titleheader{Ruprecht-Karls-Universität Heidelberg\\
@@ -67,7 +75,8 @@
     Masterstudiengang Molekulare Biotechnologie}
 \supervisor{Betreut durch Dr. Who}
 
-% Template für eure wissenschaftlichen Vorträge. Da muss die Matrikelnummer nach vorne aus Titelblatt
+% Template für eure wissenschaftlichen Vorträge (summary). 
+% Bei dieser vorlage muss die Matrikelnummer nach vorne aus Titelblatt
 %\supervisor{\begin{center}\parbox{0cm}{\begin{tabbing}
 %                Matrikelnummeraaa as \= 0123456789\kill
 %                Name: \> Vorname nachname\\
@@ -81,7 +90,7 @@
 \dateEnd{n. August 2017}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Masterthesis
+% Masterthesis (Bachelor noch nicht supportet)
 \Aname{Erstgutachtername}        % Erstgutachter
 \Aabteilung{Abteilung}           % Abteilung
 \Ainstitute{dsdsf}               % Institut
@@ -95,24 +104,26 @@
 
 
 \begin{document}
-\pagenumbering{roman}
-\maketitle
-\cleardoublepage
+\pagenumbering{roman}            % Die ersten Seitenzahlen sollen römisch sein
+\maketitle                       % Titelseite
+\cleardoublepage                 % Fang auf einer rechten Seite an
 
-\tableofcontents
+\tableofcontents                 % Inhaltsverzeichnis
 %\listofhdtitle % Table of contents for summaries
                % Make a section header like this: 
                % \hdtitle{TITLE}{DATE}{LECTURE/SEMINAR} instead of \section{}
-               
 
-\cleardoublepage 
-\pagenumbering{arabic}
+\newpage        			     % Falls erwünscht 
+\printglossaries                 % ein Abkürzungsverzeichnis               
+
+\cleardoublepage                 % Fang auf einer rechten Seite an
+\pagenumbering{arabic}           % Aber jetzt mit arabischen Seitenzahlen
 
 
 \section{Section header}
-Lorem ipsum dolor sit amet, exerci officiis no mea. Ex pro ubique quidam. Ponderum dissentias sit an, mei an graecis elaboraret. Mei et nisl nihil, iusto copiosae eam no, ad mei melius forensibus reprimique.
+Lorem ipsum dolor sit amet, exerci officiis no mea. Ex pro ubique quidam. Ponderum dissentias sit an, mei an graecis elaboraret. Mei et nisl nihil, iusto copiosae eam no, ad mei melius forensibus reprimique \gls{coli}.
 
-Quod propriae phaedrum vix te, an mei primis verear insolens. Eum case facilisis abhorreant id, eu sea dicant forensibus. Ius ad vocent splendide argumentum. Nihil vivendum vix ut. Per te impedit eleifend, in vis enim laudem ocurreret. Paulo detracto ea sed \cite{hector1999plant}.
+Quod propriae phaedrum vix te, an mei primis verear insolens. Eum case facilisis abhorreant id, eu sea dicant forensibus. Ius ad vocent splendide argumentum. Nihil vivendum vix ut. Per te impedit eleifend, in vis enim laudem ocurreret. Paulo detracto ea sed \citep{hector1999plant}.
 
 Duo agam volutpat in, ne quo suscipit consulatu interpretaris. Ius te unum veri signiferumque. Ancillae deleniti an mei, option praesent explicari in vim. Mel populo vidisse albucius ad, te eam aliquam officiis, sit integre iudicabit scriptorem at. Pri debet scribentur ei, eos at munere verterem moderatius. Vivendo interpretaris usu ex, qui et detracto delectus, his porro prodesset in.
 
@@ -120,7 +131,7 @@ Tollit scaevola at qui, sit soluta nonumes ei. Ad pri iriure scriptorem. No mei 
 
 Quis patrioque eu mea. Mei scripta pertinax at. His at dolorum dignissim. Mel dicit paulo scaevola ei. Sonet eruditi eu mei, ad sed vidit aeterno. His ei quem graece, id audire expetendis est. Maiorum posidonium cum at, nam id pertinacia delicatissimi, noster laoreet cum id.
 
-\printbibliography
+\printbibliography                % Die Bibliographie
 
 
 
