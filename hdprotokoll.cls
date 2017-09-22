@@ -14,6 +14,7 @@
 \DeclareOption{thesis}{\newcommand{\hdthesis}{true}}
 \DeclareOption{summary}{\newcommand{\hdsummary}{true}}
 \DeclareOption{normal}{\newcommand{\hdnormal}{true}}
+\DeclareOption{projectproposal}{\newcommand{\hdprojectp}{true}}
 \DeclareOption{impberklaerung}{\newcommand{\hderklaerung}{true}}
 \ProcessOptions\relax
 % % % % % % % % % % % % % % % % % % % % % % % % %
