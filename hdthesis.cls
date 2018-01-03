@@ -1,13 +1,13 @@
 \def\fileversion{0.1.1}
 \def\filedate{2017/09/20}
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{hdprotokoll}
+\ProvidesClass{hdthesis}
  [\filedate\space\fileversion\space 
    Heidelberg IMPB inofficial Latex class]
 
 
 % % % % % % % % % % % % % % % % % % % % % % % % %
-\LoadClass{scrartcl}
+\LoadClass{scrbook}
 \RequirePackage[utf8]{inputenc}
 
 \newcommand{\hdtrue}{true}
