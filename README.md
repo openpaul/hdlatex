@@ -13,7 +13,7 @@ Using the protokoll class one can write reports for internships or the summary o
 
 
 ### Wissenschaftliche Vorträge
-If the option `summary` is given the command `\hdtitle{}{}{}{}` is supplied and should be used instead of `\section{'. It creates a table of contents as asked for by the IPMB, which can be shown using `\listofhdtitle` instead of `\tableofcontents`.  See `example.tex`.
+If the option `summary` is given the command `\hdtitle{}{}{}{}` is supplied and should be used instead of `\section'. It creates a table of contents as asked for by the IPMB, which can be shown using `\listofhdtitle` instead of `\tableofcontents`.  See `example.tex`.
 
 ```
 \hdtitle{Title of the talk}{Prof. Name}{dd.mm.YYYY}{Type of Talk (e.g. DKFZ Seminar)}
