@@ -184,7 +184,7 @@ Abgegeben am \@date
 
 
 \cleardoublepage
-\pagenumbering{roman}
+\pagenumbering{Roman}
 
 
 
@@ -251,6 +251,7 @@ Ort, Datum & Unterschrift\\% adds space between the two sets of signatures
 \end{tabular}
 \ifx \hderklaerung \hdtrue 
 \vspace{1em} 
+
 Hinweis: Ohne Unterschrift, Datums- und Ortsangabe ist diese Erklärung ungültig und damit auch die Bachelor-/Masterarbeit. 
 \fi
 
