@@ -9,12 +9,23 @@
 % % % % % % % % % % % % % % % % % % % % % % % % %
 \LoadClass{scrbook}
 \RequirePackage[utf8]{inputenc}
-
+\RequirePackage{ifthen}
 \newcommand{\hdtrue}{true}
 \DeclareOption{thesis}{\newcommand{\hdthesis}{true}}
+
 \DeclareOption{summary}{\newcommand{\hdsummary}{true}}
 \DeclareOption{normal}{\newcommand{\hdnormal}{true}}
 \DeclareOption{impberklaerung}{\newcommand{\hderklaerung}{true}}
+
+% master or bachelor?
+\newcommand{\hdthesistype}{arbeit}
+\DeclareOption{master}{\renewcommand{\hdthesistype}{master}}
+\DeclareOption{bachelor}{\renewcommand{\hdthesistype}{bachelor}}
+
+% pass unknwon options on
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
+\ProcessOptions\relax
+
 \ProcessOptions\relax
 % % % % % % % % % % % % % % % % % % % % % % % % %
 % paper
@@ -203,7 +214,7 @@ Die vorliegende Arbeit wurde \@institute\ in der Zeit von \mbox{\@dateStart}\ bi
 
 
 \ifx\hdthesis \hdtrue
-Die vorliegende Masterarbeit wurde \@institute\ in der Zeit von \mbox{\@dateStart}\ bis \mbox{\@dateEnd}\ angefertigt.
+Die vorliegende \ifthenelse{\equal{\hdthesistype}{master}}{Masterarbeit}{\ifthenelse{\equal{\hdthesistype}{bachelor}}{Bachelorarbeit}{Arbeit}} wurde \@institute\ in der Zeit von \mbox{\@dateStart}\ bis \mbox{\@dateEnd}\ angefertigt.
 
 \vspace{4em}
 
@@ -232,15 +243,16 @@ Die vorliegende Masterarbeit wurde \@institute\ in der Zeit von \mbox{\@dateStar
 \ifx \hderklaerung \hdtrue  
 Ich erkläre hiermit ehrenwörtlich, dass:
 \begin{enumerate}
-    \item ich die vorliegende Bachelor-/Masterarbeit selbständig unter Anleitung verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe;
+    \item ich die vorliegende
+\ifthenelse{\equal{\hdthesistype}{master}}{Masterarbeit}{\ifthenelse{\equal{\hdthesistype}{bachelor}}{Bachelorarbeit}{Arbeit}} selbständig unter Anleitung verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe;
     \item die Übernahme wörtlicher Zitate aus der Literatur/Internet sowie die Verwendung der Gedanken anderer Autoren an den entsprechenden Stellen innerhalb der Arbeit gekennzeichnet wurde;
-    \item ich meine Bachelor-/Masterarbeit bei keiner anderen Prüfung vorgelegt habe.
+    \item ich meine \ifthenelse{\equal{\hdthesistype}{master}}{Masterarbeit}{\ifthenelse{\equal{\hdthesistype}{bachelor}}{Bachelorarbeit}{Arbeit}} bei keiner anderen Prüfung vorgelegt habe.
 \end{enumerate}
 Ich bin mir bewusst, dass eine falsche Erklärung rechtliche Folgen haben wird. 
 
 \else
 
-Ich erkläre hiermit ehrenwörtlich, dass ich die vorliegende Arbeit selbstständig angefertigt habe. Sämtliche aus fremden Quellen direkt oder indirekt übernommenen Gedanken sind als solche kenntlich gemacht. Die Arbeit wurde keiner anderen Prüfungsbehörde vorgelegt und noch nicht veröffentlicht
+Ich erkläre hiermit ehrenwörtlich, dass ich die vorliegende \ifthenelse{\equal{\hdthesistype}{master}}{Masterarbeit}{\ifthenelse{\equal{\hdthesistype}{bachelor}}{Bachelorarbeit}{Arbeit}} selbstständig angefertigt habe. Sämtliche aus fremden Quellen direkt oder indirekt übernommenen Gedanken sind als solche kenntlich gemacht. Die \ifthenelse{\equal{\hdthesistype}{master}}{Masterarbeit}{\ifthenelse{\equal{\hdthesistype}{bachelor}}{Bachelorarbeit}{Arbeit}} wurde keiner anderen Prüfungsbehörde vorgelegt und noch nicht veröffentlicht
 
 \fi
 
@@ -252,7 +264,7 @@ Ort, Datum & Unterschrift\\% adds space between the two sets of signatures
 \ifx \hderklaerung \hdtrue 
 \vspace{1em} 
 
-Hinweis: Ohne Unterschrift, Datums- und Ortsangabe ist diese Erklärung ungültig und damit auch die Bachelor-/Masterarbeit. 
+Hinweis: Ohne Unterschrift, Datums- und Ortsangabe ist diese Erklärung ungültig und damit auch die \ifthenelse{\equal{\hdthesistype}{master}}{Masterarbeit}{\ifthenelse{\equal{\hdthesistype}{bachelor}}{Bachelorarbeit}{Arbeit}}. 
 \fi
 
 \setlength{\parindent}{8pt}
