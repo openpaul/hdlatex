@@ -185,7 +185,7 @@
 \normalsize
 \@author
 
-Abgegeben am \@date
+\@date
 
 
 \end{center}
