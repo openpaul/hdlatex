@@ -2,14 +2,15 @@
 \def\filedate{2017/09/20}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{hdthesis}
- [\filedate\space\fileversion\space 
-   Heidelberg IMPB inofficial Latex class]
+[\filedate\space\fileversion\space 
+Heidelberg IMPB inofficial Latex class]
 
 
 % % % % % % % % % % % % % % % % % % % % % % % % %
 \LoadClass{scrbook}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{ifthen}
+\RequirePackage{parskip}
 \newcommand{\hdtrue}{true}
 \DeclareOption{thesis}{\newcommand{\hdthesis}{true}}
 
@@ -31,21 +32,21 @@
 % paper
 \RequirePackage{geometry}
 \geometry{top=25mm,
-    	bottom=25mm,
-    	inner=25mm,
-    	outer=25mm, 
-    	nomarginpar,
-	   	bindingoffset=12.5mm,
-    	%showframe% <- only to show the page layout
-    }
-   
+    bottom=25mm,
+    inner=25mm,
+    outer=25mm, 
+    nomarginpar,
+    bindingoffset=12.5mm,
+    %showframe% <- only to show the page layout
+}
+
 % make header and footer correct
 \RequirePackage[automark]{scrlayer-scrpage}
 \pagestyle{scrheadings}
 \clearpairofpagestyles
 \ihead{\headmark}
 \ofoot{\pagemark}
-   
+
 % zeilenabstand
 \usepackage{setspace}
 \setstretch{1.5}
@@ -55,35 +56,35 @@
 % fonts
 % caption
 \setkomafont{captionlabel}{%
-	\sffamily\bfseries
+    \sffamily\bfseries
 }
 \setkomafont{caption}{%
-	\sffamily
+    \sffamily
 }
 
 % fuß und kopfzeile
 \setkomafont{pagenumber}{%
-	\small\sffamily
+    \small\sffamily
 }
 \setkomafont{pageheadfoot}{%
-	\small\sffamily
+    \small\sffamily
 }
 
 % sections
 \setkomafont{section}{%
-	\LARGE\normalfont\sffamily
+    \LARGE\normalfont\sffamily
 }
 \setkomafont{subsection}{%
-	\normalfont\sffamily
+    \normalfont\sffamily
 }
 \setkomafont{subsubsection}{%
-	\bfseries\sffamily
+    \bfseries\sffamily
 }
 
 
 %Table of contents
 \setkomafont{disposition}{%
-	\bfseries\sffamily
+    \bfseries\sffamily
 }
 
 % % % % % % % % % % % % % % % % % % % % % % % % %
@@ -158,117 +159,119 @@
 
 % define a custom title page
 \renewcommand*{\maketitle}{%
+    
+    % remove intent
+    \setlength{\parindent}{0pt}
+    
+    \begin{titlepage}
+        
+        
+        \begin{center}
+            
+            \vfill
+            \centering
+            \@titleheader
+            
+            \vfill
+            
+            \Huge\textbf{\@title}
+            
+            \Large \textbf{\@protokolltype}
+            
+            \@supervisor
+            
+            \vfill
+            \vfill
+            
+            \normalsize
+            \@author
+            
+            \@date
+            
+            
+        \end{center}
+        
+    \end{titlepage}
+    
+    
+    
+    \cleardoublepage
+    \pagenumbering{Roman}
+    
+    
+    
+    \ifx \hdnormal \hdtrue
+    
+    Die vorliegende Arbeit wurde \@institute\ in der Zeit von \mbox{\@dateStart}\ bis \mbox{\@dateEnd}\ angefertigt.
+    
+    \vspace{4em}
+    \begin{tabular}{ll}
+        \makebox[2.5in]{\hrulefill} & \makebox[2.5in]{\hrulefill}\\
+        {Ort, Datum} & {Unterschrift (Betreuer)}\\% adds space between the two sets of signatures
+    \end{tabular}
+    
+    \vspace{4em}
+    \fi
+    
+    
+    \ifx\hdthesis \hdtrue
+    Die vorliegende \ifthenelse{\equal{\hdthesistype}{master}}{Masterarbeit}{\ifthenelse{\equal{\hdthesistype}{bachelor}}{Bachelorarbeit}{Arbeit}} wurde \@institute\ in der Zeit von \mbox{\@dateStart}\ bis \mbox{\@dateEnd}\ angefertigt.
+    
+    \vspace{1em}
+    
+    \begin{tabbing}
+        xxxxxxxxxxxxxxxxxxxxxxxxxxx \= xxxxxxxxxxxxxxxxxxxxxxxxxx \kill
+        Gutachter der Arbeit: \> \@Aname \\
+        \> \@Aabteilung \\
+        \> \@Ainstitute 
+    \end{tabbing}
+    
+    \begin{tabbing}
+        xxxxxxxxxxxxxxxxxxxxxxxxxxx \= xxxxxxxxxxxxxxxxxxxxxxxxxx \kill
+        Zweitgutachter der Arbeit: \> \@Bname \\
+        \> \@Babteilung \\
+        \> \@Binstitute 
+    \end{tabbing}
+    
+    \vspace{0.6em}
+    \fi
+    
+    
+    \section*{Eigenständigkeitserklärung}
+    
+    \ifx \hderklaerung \hdtrue  
+    Ich erkläre hiermit ehrenwörtlich, dass:
+    \begin{enumerate}
+        \item ich die vorliegende
+        \ifthenelse{\equal{\hdthesistype}{master}}{Masterarbeit}{\ifthenelse{\equal{\hdthesistype}{bachelor}}{Bachelorarbeit}{Arbeit}} selbständig unter Anleitung verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe;
+        \item die Übernahme wörtlicher Zitate aus der Literatur/Internet sowie die Verwendung der Gedanken anderer Autoren an den entsprechenden Stellen innerhalb der Arbeit gekennzeichnet wurde;
+        \item ich meine \ifthenelse{\equal{\hdthesistype}{master}}{Masterarbeit}{\ifthenelse{\equal{\hdthesistype}{bachelor}}{Bachelorarbeit}{Arbeit}} bei keiner anderen Prüfung vorgelegt habe.
+    \end{enumerate}
+    Ich bin mir bewusst, dass eine falsche Erklärung rechtliche Folgen haben wird. 
+    
+    \else
+    
+    Ich erkläre hiermit ehrenwörtlich, dass ich die vorliegende \ifthenelse{\equal{\hdthesistype}{master}}{Masterarbeit}{\ifthenelse{\equal{\hdthesistype}{bachelor}}{Bachelorarbeit}{Arbeit}} selbstständig angefertigt habe. Sämtliche aus fremden Quellen direkt oder indirekt übernommenen Gedanken sind als solche kenntlich gemacht. Die \ifthenelse{\equal{\hdthesistype}{master}}{Masterarbeit}{\ifthenelse{\equal{\hdthesistype}{bachelor}}{Bachelorarbeit}{Arbeit}} wurde keiner anderen Prüfungsbehörde vorgelegt und noch nicht veröffentlicht
+    
+    \fi
+    
+    \vspace{4em}
+    \begin{tabular}{ll}
+        \makebox[2.5in]{\hrulefill} & \makebox[2.5in]{\hrulefill}\\
+        Ort, Datum & Unterschrift\\% adds space between the two sets of signatures
+    \end{tabular}
+    \ifx \hderklaerung \hdtrue 
+    \vspace{1em} 
+    
+    Hinweis: Ohne Unterschrift, Datums- und Ortsangabe ist diese Erklärung ungültig und damit auch die \ifthenelse{\equal{\hdthesistype}{master}}{Masterarbeit}{\ifthenelse{\equal{\hdthesistype}{bachelor}}{Bachelorarbeit}{Arbeit}}. 
+    \fi
+    
 
-% remove intent
-\setlength{\parindent}{0pt}
-
-\begin{titlepage}
-
-
-\begin{center}
-
-\vfill
-\centering
-\@titleheader
-
-\vfill
-
-\Huge\textbf{\@title}
-
-\Large \textbf{\@protokolltype}
-
-\@supervisor
-
-\vfill
-\vfill
-
-\normalsize
-\@author
-
-\@date
-
-
-\end{center}
-
-\end{titlepage}
-
-
-
-\cleardoublepage
-\pagenumbering{Roman}
-
-
-
-\ifx \hdnormal \hdtrue
-
-Die vorliegende Arbeit wurde \@institute\ in der Zeit von \mbox{\@dateStart}\ bis \mbox{\@dateEnd}\ angefertigt.
-
-\vspace{4em}
-\begin{tabular}{ll}
-\makebox[2.5in]{\hrulefill} & \makebox[2.5in]{\hrulefill}\\
-{Ort, Datum} & {Unterschrift (Betreuer)}\\% adds space between the two sets of signatures
-\end{tabular}
-
-\vspace{4em}
-\fi
-
-
-\ifx\hdthesis \hdtrue
-Die vorliegende \ifthenelse{\equal{\hdthesistype}{master}}{Masterarbeit}{\ifthenelse{\equal{\hdthesistype}{bachelor}}{Bachelorarbeit}{Arbeit}} wurde \@institute\ in der Zeit von \mbox{\@dateStart}\ bis \mbox{\@dateEnd}\ angefertigt.
-
-\vspace{4em}
-
-\begin{tabbing}
-    xxxxxxxxxxxxxxxxxxxxxxxxxxx \= xxxxxxxxxxxxxxxxxxxxxxxxxx \kill
-    Gutachter der Arbeit: \> \@Aname \\
-     \> \@Aabteilung \\
-     \> \@Ainstitute \\
-\end{tabbing}
-
-\vspace{1em}
-
-\begin{tabbing}
-    xxxxxxxxxxxxxxxxxxxxxxxxxxx \= xxxxxxxxxxxxxxxxxxxxxxxxxx \kill
-    Zweitgutachter der Arbeit: \> \@Bname \\
-    \> \@Babteilung \\
-    \> \@Binstitute \\
-\end{tabbing}
-
-\vspace{1em}
-\fi
-
-
-\section*{Eigenständigkeitserklärung}
-
-\ifx \hderklaerung \hdtrue  
-Ich erkläre hiermit ehrenwörtlich, dass:
-\begin{enumerate}
-    \item ich die vorliegende
-\ifthenelse{\equal{\hdthesistype}{master}}{Masterarbeit}{\ifthenelse{\equal{\hdthesistype}{bachelor}}{Bachelorarbeit}{Arbeit}} selbständig unter Anleitung verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe;
-    \item die Übernahme wörtlicher Zitate aus der Literatur/Internet sowie die Verwendung der Gedanken anderer Autoren an den entsprechenden Stellen innerhalb der Arbeit gekennzeichnet wurde;
-    \item ich meine \ifthenelse{\equal{\hdthesistype}{master}}{Masterarbeit}{\ifthenelse{\equal{\hdthesistype}{bachelor}}{Bachelorarbeit}{Arbeit}} bei keiner anderen Prüfung vorgelegt habe.
-\end{enumerate}
-Ich bin mir bewusst, dass eine falsche Erklärung rechtliche Folgen haben wird. 
-
-\else
-
-Ich erkläre hiermit ehrenwörtlich, dass ich die vorliegende \ifthenelse{\equal{\hdthesistype}{master}}{Masterarbeit}{\ifthenelse{\equal{\hdthesistype}{bachelor}}{Bachelorarbeit}{Arbeit}} selbstständig angefertigt habe. Sämtliche aus fremden Quellen direkt oder indirekt übernommenen Gedanken sind als solche kenntlich gemacht. Die \ifthenelse{\equal{\hdthesistype}{master}}{Masterarbeit}{\ifthenelse{\equal{\hdthesistype}{bachelor}}{Bachelorarbeit}{Arbeit}} wurde keiner anderen Prüfungsbehörde vorgelegt und noch nicht veröffentlicht
-
-\fi
-
-\vspace{4em}
-\begin{tabular}{ll}
-\makebox[2.5in]{\hrulefill} & \makebox[2.5in]{\hrulefill}\\
-Ort, Datum & Unterschrift\\% adds space between the two sets of signatures
-\end{tabular}
-\ifx \hderklaerung \hdtrue 
-\vspace{1em} 
-
-Hinweis: Ohne Unterschrift, Datums- und Ortsangabe ist diese Erklärung ungültig und damit auch die \ifthenelse{\equal{\hdthesistype}{master}}{Masterarbeit}{\ifthenelse{\equal{\hdthesistype}{bachelor}}{Bachelorarbeit}{Arbeit}}. 
-\fi
-
-\setlength{\parindent}{8pt}
-\cleardoublepage
-
-
+    \cleardoublepage
+    
+    
 }
+
+% set a line space instead of indent, as asked by IPMB
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.7em}
