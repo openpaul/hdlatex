@@ -1,0 +1,53 @@
+% !TeX spellcheck = en_US
+\documentclass[%
+ 12pt,           % Schriftgroesse
+ english,        % wird an andere Pakete weitergereicht
+ a4paper,        % Seitengroesse
+ DIV14,          % Textbereichsgroesse (siehe Koma Skript Dokumentation!)
+]{scrartcl}   % hdprotokoll oder hdthesis
+% -------------------------------------------------------------------------
+
+
+\usepackage[main=english, ngerman]{babel} % Spracheinstellung
+\usepackage[T1]{fontenc}                  % T1 Schrift Encoding
+\usepackage[utf8]{inputenc}               % Font Encoding, benoetigt fuer Umlaute
+\usepackage{pgffor}
+
+
+\usepackage{geometry}
+\geometry{top=25mm,
+    bottom=25mm,
+    inner=35mm,
+    outer=25mm, 
+    nomarginpar,
+    bindingoffset=0mm,
+    %showframe% <- only to show the page layout
+}
+\setlength{\parindent}{0em}
+
+
+
+
+
+\makeatletter
+\title{Inspecting dings in bums using this new cool ding}\let\Title\@title
+\author{Maxim Musterperson}          \let\Author\@author
+\date{2018}           \let\Date\@date
+\makeatother
+
+
+
+\begin{document}
+ 
+    
+    \small  %\tiny  \footnotesize
+    
+\foreach \n in {1,...,8}{
+
+    \Author \hspace{1em} \Title\ (\Date)
+    
+    \vspace{5em}
+
+}
+
+\end{document}
