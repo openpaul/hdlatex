@@ -260,11 +260,6 @@ Heidelberg IMPB inofficial Latex class]
         \makebox[2.5in]{\hrulefill} & \makebox[2.5in]{\hrulefill}\\
         Ort, Datum & Unterschrift\\% adds space between the two sets of signatures
     \end{tabular}
-    \ifx \hderklaerung \hdtrue 
-    \vspace{1em} 
-    
-    Hinweis: Ohne Unterschrift, Datums- und Ortsangabe ist diese Erklärung ungültig und damit auch die \ifthenelse{\equal{\hdthesistype}{master}}{Masterarbeit}{\ifthenelse{\equal{\hdthesistype}{bachelor}}{Bachelorarbeit}{Arbeit}}. 
-    \fi
     
 
     \cleardoublepage
